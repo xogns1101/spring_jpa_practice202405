@@ -23,6 +23,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_no")
     private Long id; // 글 번호
+    
+    @Column(nullable = false)
+    private String title; // 제목
 
     @Column(nullable = false)
     private String writer; // 작성자
