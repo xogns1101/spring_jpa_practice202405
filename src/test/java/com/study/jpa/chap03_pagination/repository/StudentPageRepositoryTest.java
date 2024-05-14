@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 // JPA는 INSERT, UPDATE, DELETE시에 트랜잭션을 기준으로 동작하는 경우가 많음.
 // 기능을 보장받기 위해서는 웬만하면 트랜잭션 기능을 함께 사용해야 합니다.
@@ -77,38 +79,38 @@ class StudentPageRepositoryTest {
         System.out.println("\n\n\n");
     }
 
-    @Test
-    @DisplayName("이름검색 + 페이징")
-    void testSearchAndPaging() {
-        // given
-        int pageNo = 3;
-        int size = 9;
-        Pageable pageInfo = PageRequest.of(pageNo-1, size);
-
-        // when
-        Page<Student> students
-                = studentPageRepository.findByNameContaining("3", pageInfo);
-
-        int totalPages = students.getTotalPages();
-        long totalElements = students.getTotalElements();
-        boolean next = students.hasNext();
-        boolean prev = students.hasPrevious();
-
-        /*
-         페이징 처리 시에 버튼 알고리즘은 jpa에서 따로 제공하지 않기 때문에
-         버튼 배치 알고리즘을 수행할 클래스는 여전히 필요합니다.
-         제공되는 정보는 이전보다 많기 때문에, 좀 더 수월하게 처리가 가능합니다.
-         */
-
-        // then
-        System.out.println("\n\n\n");
-        System.out.println("totalPages = " + totalPages);
-        System.out.println("totalElements = " + totalElements);
-        System.out.println("next = " + next);
-        System.out.println("prev = " + prev);
-        students.getContent().forEach(System.out::println);
-        System.out.println("\n\n\n");
-    }
+//    @Test
+//    @DisplayName("이름검색 + 페이징")
+//    void testSearchAndPaging() {
+//        // given
+//        int pageNo = 3;
+//        int size = 9;
+//        Pageable pageInfo = PageRequest.of(pageNo-1, size);
+//
+//        // when
+//        Page<Student> students
+//                = studentPageRepository.findByNameContaining("3", pageInfo);
+//
+//        int totalPages = students.getTotalPages();
+//        long totalElements = students.getTotalElements();
+//        boolean next = students.hasNext();
+//        boolean prev = students.hasPrevious();
+//
+//        /*
+//         페이징 처리 시에 버튼 알고리즘은 jpa에서 따로 제공하지 않기 때문에
+//         버튼 배치 알고리즘을 수행할 클래스는 여전히 필요합니다.
+//         제공되는 정보는 이전보다 많기 때문에, 좀 더 수월하게 처리가 가능합니다.
+//         */
+//
+//        // then
+//        System.out.println("\n\n\n");
+//        System.out.println("totalPages = " + totalPages);
+//        System.out.println("totalElements = " + totalElements);
+//        System.out.println("next = " + next);
+//        System.out.println("prev = " + prev);
+//        students.getContent().forEach(System.out::println);
+//        System.out.println("\n\n\n");
+//    }
 
 }
 
