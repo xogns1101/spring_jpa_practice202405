@@ -34,4 +34,11 @@ public class PostApiController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable Long id) {
+        log.info("/api/v1/posts/{}: GET", id);
+
+        return null;
+    }
+
 }
