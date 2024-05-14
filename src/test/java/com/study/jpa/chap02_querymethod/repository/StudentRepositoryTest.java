@@ -1,11 +1,7 @@
-package com.study.jpa.chap01_basic.repository;
+package com.study.jpa.chap02_querymethod.repository;
 
 import com.study.jpa.chap02_querymethod.entity.Student;
-import com.study.jpa.chap2_querymethod.repository.StudentRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -23,7 +19,7 @@ class StudentRepositoryTest {
     @Autowired
     StudentRepository studentRepository;
 
-    //    @BeforeAll : 해당 테스트 클래스를 초기화 할때 딱 한번 수행되는 메서드. (static으로 선언해야 함.)
+    //    @BeforeAll: 해당 테스트 클래스를 초기화할 때 딱 한번 수행되는 메서드. (static으로 선언해야 함.)
     //@BeforeEach // 각각의 테스트 메서드 실행 직전에 수행되는 메서드.
     void insertData() {
         Student s1 = Student.builder()
@@ -59,7 +55,6 @@ class StudentRepositoryTest {
         assertEquals(1, students.size());
 
         System.out.println("students.get(0) = " + students.get(0));
-
     }
 
     @Test
@@ -68,6 +63,7 @@ class StudentRepositoryTest {
         // given
         String city = "부산시";
         String major = "수학교육과";
+
         // when
         List<Student> students = studentRepository.findByCityAndMajor(city, major);
 
@@ -85,10 +81,14 @@ class StudentRepositoryTest {
         String major = "수학";
         // when
         List<Student> students = studentRepository.findByMajorContaining(major);
+
         // then
         assertEquals(4, students.size());
 
         System.out.println("\n\n\n");
+        students.forEach(System.out::println);
+        System.out.println("\n\n\n");
+
     }
 
     @Test
@@ -96,7 +96,6 @@ class StudentRepositoryTest {
     void testNativeSQL() {
         // given
         String name = "대길이";
-
         // when
         List<Student> students = studentRepository.findNameWithSQL(name);
 
@@ -105,6 +104,7 @@ class StudentRepositoryTest {
 
         System.out.println("\n\n\n");
         students.forEach(stu -> System.out.println(stu));
+
     }
 
     @Test
@@ -120,6 +120,7 @@ class StudentRepositoryTest {
         System.out.println("\n\n\n");
         list.forEach(System.out::println);
         System.out.println("\n\n\n");
+
     }
 
     @Test
@@ -129,6 +130,7 @@ class StudentRepositoryTest {
         String name = "이";
         // when
         List<Student> students = studentRepository.searchByNameWithJPQL(name);
+
         // then
         assertEquals(6, students.size());
         System.out.println("\n\n\n");
@@ -150,5 +152,19 @@ class StudentRepositoryTest {
         assertEquals(0, students.size());
     }
 
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
